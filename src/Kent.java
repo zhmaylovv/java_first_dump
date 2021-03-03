@@ -36,7 +36,19 @@ public class Main {
       int n = 1;
       System.out.println(getTotalTime(heroes, n));
       }
-
+/* Проверка времени
+long start = System.currentTimeMillis();
+      
+      for (int i = 0; i<=1000000; i++){
+      
+      getTotalTime(heroes, n);
+      }
+      
+      long timeWorkCode = System.currentTimeMillis() - start;
+      System.out.println("Время выполнения миллиона операций: " + timeWorkCode + " миллисекунд");
+      
+      }
+*/
     public static int sum (List<Integer> l){
         int s = 0;
         for (int i : l){
