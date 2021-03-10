@@ -58,7 +58,7 @@ long start = System.currentTimeMillis();
       }
 
     public static int getTotalTime(List<Integer> heroes, int n) {
-        int timer = 0;
+        int timer = 0; // Add comment
         int c;
         while(sum(heroes) > 0){
             timer += 1;
