@@ -4,7 +4,7 @@ https://www.codewars.com/kata/526571aae218b8ee490006f4/
 
 */
 
-public class BitCounting {
+public class Bitcounting {
 
 	public static int countBits(int n){
     int c = 0;
@@ -18,10 +18,7 @@ public class BitCounting {
 
 	}
 
-  public class BitCountingv2 {
-  public static int countBits(int n){
-    return Integer.bitCount(n);
-  }
+
 
 }
-}
+

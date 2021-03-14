@@ -1,6 +1,6 @@
 import java.util.*;
 
-class SpotList extends ArrayList<Integer>
+class Spotlist extends ArrayList<Integer>
     {
 
         public int sum ()
@@ -12,18 +12,18 @@ class SpotList extends ArrayList<Integer>
             }
         return s;
         }
-    public static void main (String args []){
+    public static void main (String[] args){
 
 }
     }
 
 
-public class Main
+public class SpotList
 {
 
 	public static void main(String[] args)
 	{
-	  SpotList heroes = new SpotList();
+	  Spotlist heroes = new Spotlist();
       heroes.add(6);
       heroes.add(2);
       heroes.add(9);

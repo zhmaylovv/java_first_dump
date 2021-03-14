@@ -16,8 +16,8 @@ public class Positive{
   }
 
 
-  public class Positivev2{
-      public static int sum(int[] arr){
-          return Arrays.stream(arr).filter(v -> v > 0).sum();
-      }
+  //public class Positivev2{
+  //    public static int sum(int[] arr){
+     //     return Arrays.stream(arr).filter(v -> v > 0).sum();
+      //}
 }

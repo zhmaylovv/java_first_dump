@@ -26,10 +26,10 @@ total_time([3, 5, 10], 2) --> 13
 
 
 import java.util.*;
-public class Main {
+public class Kent {
 
     public static void main(String[] args){
-      List<Integer> heroes = new ArrayList<Integer>();
+      List<Integer> heroes = new ArrayList<>();
       heroes.add(6);
       heroes.add(2);
       heroes.add(9);

@@ -15,10 +15,10 @@ class Dog extends Animal {
 
 public class Override {
 
-   public static void main(String args[]) {
+   public static void main(String[] args) {
       Animal a = new Animal();   // Animal - ссылка и объект
       Animal b = new Dog();   // Animal - ссылка, но Dog - объект
-      Dog c = new Dog()
+      Dog c = new Dog();
       a.move();   // Запускает метод в классе Animal
       b.move();   // Запускает метод в классе Dog
       //b.bark(); //error
