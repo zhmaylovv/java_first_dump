@@ -1,37 +1,36 @@
-import java.util.*;
-public class Main
-{
-	public static void main(String[] args) {
-			
-	    Double max = 0.0;
-	    Double min = 1.0;
-	    List<Double> arr = new ArrayList<Double>();
-	    int arrLength = 10;
+package zhmaylo;
+import java.util.Scanner;
 
+public class Task2 {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter array length: ");
+        double[] array = new double[input.nextInt()];
+        System.out.print("Enter upper limit: ");
+        double upperLimit = input.nextInt();
+        System.out.print("Enter lower limit: ");
+        double lowerLimit = input.nextInt();
+        double min = upperLimit;
+        double max = lowerLimit;
 
-	    for (int i = 0; i < arrLength; i++){
-	        Double number = Math.random();
-	        arr.add(number);
-	        if (number < min){
-	            min = number;
-	        }
-	        if (number > max){
-	            max = number;
-	        }
-	    }
-	    Double mid = midl(arr);
+        for (int i = 0; i < array.length; i++ ){
+            array[i] = lowerLimit +(Math.random() * upperLimit);
+            if (array[i]> max){
+                max = array[i];
+            }else if (array[i] < min){
+                min = array[i];
+            }
+        }
+        System.out.println("Maximum number in array is: " + max);
+        System.out.println("Minimum number in array is: " + min);
+        System.out.println("Average number in array is: " + calcAverage(array));
+    }
 
-		System.out.println("Массив: " + arr);
-		System.out.println("Среднее значение: " + mid);
-		System.out.println("Максимальное значение: " + max);
-		System.out.println("Минимальное значение: " + min);
-	}
+    public static double calcAverage(double[] array){
+        double sum = 0.0;
 
-	public static Double midl(List arr){
-	    Double summ = 0.0;
-	    for (int i = 0; i < arr.size(); i++){
-	        summ  += (Double) arr.get(i);
-	    }
-	    return summ / arr.size();
-	}
+        for (double element : array) sum += element;
+        return sum / array.length;
+
+    }
 }
