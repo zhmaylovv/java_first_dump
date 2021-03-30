@@ -31,6 +31,7 @@ public class Queue{
 	        System.out.println("Queue is empty");
 	    }
 	    else{
+          queue[first] = null;
 	        first++;
 	        count--;
 	    }

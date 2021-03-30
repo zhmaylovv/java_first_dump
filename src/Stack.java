@@ -15,17 +15,17 @@ public class Stack{
 	}
 
 	public void push(Object element){
-	    top++;
-	    stack[top] = element;
+	    stack[++top] = element;
 	}
 
 	public Object pop(){
-	    if (isEmpty()) {
+        if (isEmpty()) {
 	        System.out.println('Error: stack is empty!');
 	            return null;
         }
         else {
-	        return stack[top--];
+          Object tempObj = stack[top--]
+          return tempObj;
 	    }
 	}
 
