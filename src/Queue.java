@@ -1,37 +1,48 @@
+package zhmaylo;
+
+import java.util.Arrays;
+
 public class Queue{
+	private int size;
 	private int count;
-	private Object[] queue;
+	private Object[] valuese;
 	private int first;
 	private int last;
 
 	public Queue(int size){
-	    queue = new Object[size];
-	    first = -1;
-	    last = -1;
-	    count = 0;
+		this.valuese = new Object[size];
+	    this.size = size;
+		this.first = -1;
+		this.last = -1;
+		this.count = 0;
 	}
 
 	public boolean isEmpty(){
-	    return (count == 0);
+		return (count == 0);
 	}
 
 	public void enqueue(Object element){
+		if (count + 1 == size) this.extend();
 	    if (count == 0){
-	        first++;
+			valuese[++last] = element;
+			first++;
+	        count++;
 	    }
 	    else{
-	        queue[++last] = element;
+	        valuese[++last] = element;
 	        count++;
 	    }
 
 	}
 
 	public void dequeue(){
-	    if (queue.isEmpty){
-	        System.out.println("Queue is empty");
+	    if (this.isEmpty()){
+			this.first = -1;
+			this.last = -1;
+	        throw new IndexOutOfBoundsException("Queue is empty!");
 	    }
 	    else{
-          queue[first] = null;
+          valuese[first] = null;
 	        first++;
 	        count--;
 	    }
@@ -39,14 +50,29 @@ public class Queue{
 	}
 
 	public Object top(){
-	    if (queue.isEmpty){
-	        return null;
+	    if (this.isEmpty()){
+			throw new IndexOutOfBoundsException("Queue is empty!");
 	    }
 	    else{
-	        return queue[first];
+	        return valuese[first];
 	    }
 	}
+	private void extend(){
+		Object[] temp = valuese.clone();
+		this.size *= 2;
+		this.valuese = new Object[size];
+		System.arraycopy(temp,0, valuese,0, count);
+	}
 
+	@Override
+	public String toString() {
+		return "Queue{" +
+				"count=" + count +
+				", queue=" + Arrays.toString(valuese) +
+				", first=" + first +
+				", last=" + last +
+				'}';
+	}
 
 
 }

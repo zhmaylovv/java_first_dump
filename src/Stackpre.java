@@ -1,7 +1,7 @@
 package zhmaylo;
 
 public class Stack{
-	private int size;
+	private int size
 	private Object[] stack;
 	private int top;
 
@@ -20,18 +20,18 @@ public class Stack{
 
 	public Object pop(){
         if (isEmpty()) {
-	        System.out.println("Error: stack is empty!");
+	        System.out.println('Error: stack is empty!');
 	            return null;
         }
         else {
-          Object tempObj = stack[top--];
+          Object tempObj = stack[top--]
           return tempObj;
 	    }
 	}
 
 	public Object top(){
 	    if (isEmpty()) {
-	        System.out.println("Error: stack is empty!");
+	        System.out.println('Error: stack is empty!');
 	            return null;
 	    }
 	    else {
