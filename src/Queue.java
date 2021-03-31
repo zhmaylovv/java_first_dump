@@ -1,78 +1,129 @@
 package zhmaylo;
 
-import java.util.Arrays;
+/**
+ * Класс Queue, реализующий структуру данных "очередь".
+ *
+ * @version 1.0
+ * @autor Жмайло Василий
+ */
 
-public class Queue{
-	private int size;
-	private int count;
-	private Object[] valuese;
-	private int first;
-	private int last;
+public class Queue {
+    /**
+     * Переменная size: размер очереди
+     */
+    private int size;
+    /**
+     * Переменная count: счетчик количества элементов в очереди
+     */
+    private int count;
+    /**
+     * Переменная items: Новый обьект- список элементов очереди
+     */
+    private Object[] items;
+    /**
+     * Переменная first: номер первого элемента очереди
+     */
+    private int first;
+    /**
+     * Переменная last: номер последнего элемента очереди
+     */
+    private int last;
 
-	public Queue(int size){
-		this.valuese = new Object[size];
-	    this.size = size;
-		this.first = -1;
-		this.last = -1;
-		this.count = 0;
-	}
+    /**
+     * Конструктор новой очереди
+     *
+     * @param size - размер очереди
+     */
+    public Queue(int size) {
+        this.items = new Object[size];
+        this.size = size;
+        this.first = -1;
+        this.last = -1;
+        this.count = 0;
+    }
 
-	public boolean isEmpty(){
-		return (count == 0);
-	}
+    /**
+     * Функция проверки пустоты списка
+     *
+     * @return возвращет true если список пуст, false если есть элементы
+     */
+    public boolean isEmpty() {
 
-	public void enqueue(Object element){
-		if (count + 1 == size) this.extend();
-	    if (count == 0){
-			valuese[++last] = element;
-			first++;
-	        count++;
-	    }
-	    else{
-	        valuese[++last] = element;
-	        count++;
-	    }
+        return (count == 0);
+    }
 
-	}
+    /**
+     * Процедура добавления элемента в очередь на позицию
+     * c индексом равным переменной last.
+     * Если размер очереди == size - 1 расширяется методом {@link Queue#extend}
+     *
+     * @param element - добавляемый элемент.
+     */
+    public void enqueue(Object element) {
+        if (count + 1 == size) this.extend();
+        if (count == 0) {
+            items[++last] = element;
+            first++;
+            count++;
+        } else {
+            items[++last] = element;
+            count++;
+        }
+    }
 
-	public void dequeue(){
-	    if (this.isEmpty()){
-			this.first = -1;
-			this.last = -1;
-	        throw new IndexOutOfBoundsException("Queue is empty!");
-	    }
-	    else{
-          valuese[first] = null;
-	        first++;
-	        count--;
-	    }
+    /**
+     * Процедура удаления элемента из очереди.
+     * удаляется элемент с индексом равным переменной first
+     */
+    public void dequeue() {
+        if (this.isEmpty()) {
+            this.first = -1;
+            this.last = -1;
+        } else {
+            items[first] = null;
+            first++;
+            count--;
+        }
+    }
 
-	}
+    /**
+     * Функция получения первого элемента очереди.
+     *
+     * @return возвращает первый элемент очереди, не удаляя его, если очередь пуста возвращает null
+     */
+    public Object top() {
+        if (this.isEmpty()) {
+            return null;
+        } else {
+            return items[first];
+        }
+    }
 
-	public Object top(){
-	    if (this.isEmpty()){
-			throw new IndexOutOfBoundsException("Queue is empty!");
-	    }
-	    else{
-	        return valuese[first];
-	    }
-	}
-	private void extend(){
-		Object[] temp = valuese.clone();
-		this.size *= 2;
-		this.valuese = new Object[size];
-		System.arraycopy(temp,0, valuese,0, count);
-	}
+    /**
+     * Процедура расширения границ очереди.
+     * Создает новый обьект очереди с удвоенной текущей длинной,
+     * затем копирует в него старую очередь.
+     */
+    private void extend() {
+        Object[] temp = items.clone();
+        this.size *= 2;
+        this.items = new Object[size];
+        System.arraycopy(temp, 0, items, 0, count);
+    }
 
-	@Override
-	public String toString() {
-		return "Queue{" +
-				"count=" + count +
-				", queue=" + Arrays.toString(valuese) +
-				", first=" + first +
-				", last=" + last +
-				'}';
-	}
+    /**
+     * Переопределение функции toString. Отображение элементов очереди скрыто,
+     * для информативного прохождения тестов
+     */
+    @Override
+    public String toString() {
+        return "Queue{" +
+                "count=" + count +
+                ", items= " + "Content is hidden" + // for un hide: Arrays.toString(items)
+                ", first=" + first +
+                ", last=" + last +
+                '}';
+    }
 
 
 }
