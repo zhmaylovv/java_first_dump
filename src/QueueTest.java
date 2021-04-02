@@ -4,22 +4,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class QueueTest {
-    /**
-     * Создаем тестовый обьект
-     */
+
     private static Integer testObject = 101010;
-    /**
-     * Частота вывода println для циклов
-     */
     private int printRange = 100000;
 
-    /**
-     * Нагрузочное тестирование. Создаем очередь с миллионом testObject.
-     * Выводим принт с частотой printRange
-     * убрано отображение элементов очереди в: {@link Queue#toString}
-     */
+
     @Test
-    void enqueue() {
+    void whatIfMillionsQueue() {
         Queue queue = new Queue(5);
         for (int i = 0; i < 1000000; i++) {
             queue.enqueue(testObject);
@@ -30,13 +21,9 @@ class QueueTest {
         }
     }
 
-    /**
-     * Тестирование функции isEmpty.
-     * 1. Создаем пустую очередь, если isEmpty == false: Error
-     * 2. Добавляем testObject в очередь, если isEmpty == true: Error
-     */
+
     @Test
-    void isEmpty() {
+    void isIsEmptyCorrectBoolReturn() {
         Queue queue = new Queue(5);
         Assertions.assertTrue(queue.isEmpty());
 
@@ -44,15 +31,9 @@ class QueueTest {
         Assertions.assertFalse(queue.isEmpty());
     }
 
-    /**
-     * Создаем обьект пустой очереди,
-     * Если myQueue.top() != null : Error
-     *
-     * Добавляем в нее testObject
-     * Если testObject != myQueue.top() : Error
-     */
+
     @Test
-    void top() {
+    void crashIfWrongTopReturn() {
         Queue queue = new Queue(5);
         Assertions.assertEquals(null, queue.top());
         queue.enqueue(testObject);
@@ -60,16 +41,9 @@ class QueueTest {
         System.out.println("Top element: " + queue.top());
     }
 
-    /**
-     * Нагрузочное тестирование функции dequeue.
-     * Создаем очередь с миллионом testObject.
-     *
-     * Освобождаем очередь по элементу.
-     * Выводим принт с частотой printRange
-     * убрано отображение элементов очереди в: {@link Queue#toString()}
-     */
+
     @Test
-    void Dequeue() {
+    void checkCorrectDeliteElements() {
         Queue queue = new Queue(5);
         for (int i = 0; i < 1000000; i++) {
             queue.enqueue(testObject);
