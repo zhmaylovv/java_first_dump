@@ -11,7 +11,7 @@ public class Queue {
     /**
      * Переменная size: размер очереди
      */
-    private int size = 5;
+    private int size;
     /**
      * Переменная count: счетчик количества элементов в очереди
      */
@@ -30,6 +30,11 @@ public class Queue {
     private int last;
 
     /**
+     * Переменная maxSize: максимальный размер очереди
+     */
+    private int maxSize;
+
+    /**
      * Конструктор новой очереди
      *
      * @param size - размер очереди
@@ -40,6 +45,7 @@ public class Queue {
         this.first = -1;
         this.last = -1;
         this.count = 0;
+        this.maxSize = 2000000;
     }
 
     /**
@@ -48,7 +54,6 @@ public class Queue {
      * @return возвращет true если очередт пуст, false если есть элементы
      */
     public boolean isEmpty() {
-
         return (count == 0);
     }
 
@@ -60,15 +65,13 @@ public class Queue {
      * @param element - добавляемый элемент.
      */
     public void enqueue(Object element) {
-        if (count + 1 == size) this.extend();
-        if (count == 0) {
-            items[++last] = element;
-            first++;
-            count++;
-        } else {
-            items[++last] = element;
-            count++;
-        }
+        if (count == maxSize) throw new IndexOutOfBoundsException("Queue is oversize!");
+        if (count + 1 == size) extend();
+        if (count == 0) first++;
+        last++;
+        items[last] = element;
+        count++;
+
     }
 
     /**
@@ -76,13 +79,13 @@ public class Queue {
      * удаляется элемент с индексом равным переменной first
      */
     public void dequeue() {
-        if (this.isEmpty()) {
-            this.first = -1;
-            this.last = -1;
-        } else {
+        if (count > 0){
             items[first] = null;
             first++;
             count--;
+        }else{
+            first = -1;
+            last = -1;
         }
     }
 
@@ -92,7 +95,7 @@ public class Queue {
      * @return возвращает первый элемент очереди, не удаляя его, если очередь пуста возвращает null
      */
     public Object top() {
-        if (this.isEmpty()) {
+        if (isEmpty()) {
             return null;
         } else {
             return items[first];
@@ -106,8 +109,8 @@ public class Queue {
      */
     private void extend() {
         Object[] temp = items.clone();
-        this.size *= 2;
-        this.items = new Object[size];
+        size *= 2;
+        items = new Object[size];
         System.arraycopy(temp, 0, items, 0, count);
     }
 

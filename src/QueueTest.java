@@ -5,7 +5,8 @@ import org.junit.jupiter.api.Test;
 
 class QueueTest {
 
-    private static Integer testObject = 101010;
+    private static String testObject = "Simple test string";
+    private static String testObject1 = "Simple test string";
     private int printRange = 100000;
 
 
@@ -13,6 +14,7 @@ class QueueTest {
     void whatIfMillionsQueue() {
         Queue queue = new Queue(5);
         for (int i = 0; i < 1000000; i++) {
+            testObject = String.valueOf(i); //сделаем миллион обьектов а не миллион ссылок на один
             queue.enqueue(testObject);
             if (printRange == i) {
                 printRange *= 2;
@@ -23,7 +25,7 @@ class QueueTest {
 
 
     @Test
-    void isIsEmptyCorrectBoolReturn() {
+    void IsEmptyCorrectBoolReturn() {
         Queue queue = new Queue(5);
         Assertions.assertTrue(queue.isEmpty());
 
@@ -35,27 +37,34 @@ class QueueTest {
     @Test
     void crashIfWrongTopReturn() {
         Queue queue = new Queue(5);
-        Assertions.assertEquals(null, queue.top());
+        Assertions.assertNull(queue.top());
         queue.enqueue(testObject);
         Assertions.assertEquals(testObject, queue.top());
-        System.out.println("Top element: " + queue.top());
     }
 
 
     @Test
-    void checkCorrectDeliteElements() {
+    void checkCorrectDeleteElements() {
         Queue queue = new Queue(5);
-        for (int i = 0; i < 1000000; i++) {
-            queue.enqueue(testObject);
-        }
-        for (int i = 0; i < 1000000; i++) {
-            queue.dequeue();
-            if (printRange == i) {
-                printRange *= 2;
-                System.out.println("Dequeue func " + queue);
-            }
-        }
+        queue.enqueue(testObject);
+        queue.enqueue(testObject1);
+        Assertions.assertEquals(testObject, queue.top());
+        queue.dequeue();
+        Assertions.assertEquals(testObject1, queue.top());
     }
 
 
+    @Test
+    void checkQueueOverSized() {
+        Queue queue = new Queue(5);
+        try {
+            for (int i = 0; i < 2000001; i++) {
+                queue.enqueue(testObject);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            Assertions.assertEquals(e.getMessage(), "Queue is oversize!");
+        }
+
+
+    }
 }

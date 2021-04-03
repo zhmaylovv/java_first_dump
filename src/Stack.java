@@ -1,4 +1,5 @@
 package zhmaylo;
+
 /**
  * Класс stack, реализующий структуру данных "стек".
  *
@@ -6,75 +7,117 @@ package zhmaylo;
  * @autor Жмайло Василий
  */
 
-public class Stack{
-	/**
+public class Stack {
+    /**
      * Переменная size: размер стека
      */
-	private int size ;
-	/**
+    private int size;
+    /**
      * Переменная Stack: список элементов стека
      */
-	private Object[] stack;
-	/**
+    private Object[] stack;
+    /**
      * Переменная top: индекс верхнего элемента
      */
-	private int top;
-	/**
-	     * Конструктор нового стека
-			 * @param size - размер стека
-	     */
-	public Stack(int size){
-	    this.stack = new Object[size];
-	    this.top = -1;
+    private int top;
 
-	}
+    /**
+     * Переменная count: колличество элементов в стеке
+     */
+    private int count;
 
-	/**
+    /**
+     * Переменная maxSize: максимальный размер стека
+     */
+    private int maxSize;
+
+    /**
+     * Конструктор нового стека
+     *
+     * @param size - размер стека
+     */
+    public Stack(int size) {
+        this.stack = new Object[size];
+        this.top = -1;
+        this.count = 0;
+        this.size = size;
+        this.maxSize = 2000000;
+    }
+
+    /**
      * Функция проверки пустоты стека
      *
      * @return возвращет true если стек пуст, false если есть элементы
      */
-	public boolean isEmpty(){
-	    return (this.top == -1);
-	}
-	/**
-      * Процедура добавления элемента в стек
-      *
-      * @param element - добавляемый элемент.
-      */
-	public void push(Object element){
-	    stack[++this.top] = element;
-	}
-	/**
-      * Функция получения крайнего элемента стека с его удалением.
-      *
-      * @return возвращает крайний элемент стека, удаляя его, если стек пуст
-			* возвращает null
-      */
-	public Object pop(){
-        if (this.isEmpty()) {
-	      	return null;
+    public boolean isEmpty() {
+        return (top == -1);
+    }
+
+    /**
+     * Процедура добавления элемента в стек
+     *
+     * @param element - добавляемый элемент.
+     */
+    public void push(Object element) {
+        if (count + 1 == size) extend();
+        if (count == maxSize) throw new IndexOutOfBoundsException("Stack is oversize!");
+        top++;
+        stack[top] = element;
+        count++;
+    }
+
+    /**
+     * Функция получения крайнего элемента стека с его удалением.
+     *
+     * @return возвращает крайний элемент стека, удаляя его, если стек пуст
+     * возвращает null
+     */
+    public Object pop() {
+        if (isEmpty()) {
+            return null;
         }
         else {
-					//добавть обнуление
-          Object tempObj = stack[top--];
-          return tempObj;
-	    }
-	}
-	/**
-      * Функция получения крайнего элемента стека.
-      *
-      * @return возвращает крайний элемент стека, не удаляя его, если стек пуст
-			* возвращает null
-      */
-	public Object top(){
-	    if (this.isEmpty()) {
-        	return null;
-	    }
-	    else {
-	        return this.stack[this.top];
-	    }
-	}
-	//добавть расширение стека
-	//добавить toString
+            Object tempObj = stack[top];
+            stack[top] = null;
+            top--;
+            count--;
+            return tempObj;
+        }
+    }
+
+    /**
+     * Функция получения крайнего элемента стека.
+     *
+     * @return возвращает крайний элемент стека, не удаляя его, если стек пуст
+     * возвращает null
+     */
+    public Object top() {
+        if (isEmpty()) {
+            return null;
+        } else {
+            return stack[top];
+        }
+    }
+
+    private void extend (){
+        Object[] temp = stack.clone();
+        size *= 2;
+        stack = new Object[size];
+        System.arraycopy(temp, 0, stack, 0, count);
+    }
+
+    /**
+     * Переопределение функции toString. Отображение элементов стека скрыто,
+     * для информативного прохождения тестов
+     */
+
+    @Override
+    public String toString() {
+        return "Stack{" +
+                "size=" + size +
+                ", stack=" + "Content is hidden" + //for un hide: Arrays.toString(stack)
+                ", top=" + top +
+                '}';
+    }
+
 }
