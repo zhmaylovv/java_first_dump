@@ -58,9 +58,9 @@ public class Stack {
      *
      * @param element - добавляемый элемент.
      */
-    public void push(Object element) {
+    public void push(Object element) throws IndexOutOfReservedStack {
         if (count + 1 == size) extend();
-        if (count == maxSize) throw new IndexOutOfBoundsException("Stack is oversize!");
+        if (count == maxSize) throw new IndexOutOfReservedStack("Stack is oversize!");
         top++;
         stack[top] = element;
         count++;
@@ -73,16 +73,12 @@ public class Stack {
      * возвращает null
      */
     public Object pop() {
-        if (isEmpty()) {
-            return null;
-        }
-        else {
-            Object tempObj = stack[top];
-            stack[top] = null;
-            top--;
-            count--;
-            return tempObj;
-        }
+        if (isEmpty()) return null;
+		    Object tempObj = stack[top];
+        stack[top] = null;
+        top--;
+        count--;
+        return tempObj;
     }
 
     /**
@@ -92,11 +88,8 @@ public class Stack {
      * возвращает null
      */
     public Object top() {
-        if (isEmpty()) {
-            return null;
-        } else {
-            return stack[top];
-        }
+        if (isEmpty()) return null;
+      	return stack[top];
     }
 
     private void extend (){
@@ -110,7 +103,6 @@ public class Stack {
      * Переопределение функции toString. Отображение элементов стека скрыто,
      * для информативного прохождения тестов
      */
-
     @Override
     public String toString() {
         return "Stack{" +
@@ -119,5 +111,4 @@ public class Stack {
                 ", top=" + top +
                 '}';
     }
-
 }

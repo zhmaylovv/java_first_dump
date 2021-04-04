@@ -48,6 +48,7 @@ public class Queue {
         this.maxSize = 2000000;
     }
 
+
     /**
      * Функция проверки пустоты очереди
      *
@@ -64,14 +65,13 @@ public class Queue {
      *
      * @param element - добавляемый элемент.
      */
-    public void enqueue(Object element) {
-        if (count == maxSize) throw new IndexOutOfBoundsException("Queue is oversize!");
+    public void enqueue(Object element) throws IndexOutOfReservedQueue {
+        if (count == maxSize) throw new IndexOutOfReservedQueue("Queue is oversize!");
         if (count + 1 == size) extend();
         if (count == 0) first++;
         last++;
         items[last] = element;
         count++;
-
     }
 
     /**
@@ -83,7 +83,7 @@ public class Queue {
             items[first] = null;
             first++;
             count--;
-        }else{
+        } else {
             first = -1;
             last = -1;
         }
@@ -95,11 +95,8 @@ public class Queue {
      * @return возвращает первый элемент очереди, не удаляя его, если очередь пуста возвращает null
      */
     public Object top() {
-        if (isEmpty()) {
-            return null;
-        } else {
-            return items[first];
-        }
+        if (isEmpty()) return null;
+        return items[first];
     }
 
     /**
@@ -127,6 +124,4 @@ public class Queue {
                 ", last=" + last +
                 '}';
     }
-
-
 }
