@@ -9,34 +9,62 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class UserSberTest {
 
-    private static Collection<UserSber> collA = new ArrayList<>();
-    private static Collection<UserSber> collB = new ArrayList<>();
+    private static Collection<UserSber> collA;
+    private static Collection<UserSber> collB;
 
     @BeforeAll
     static void beforeAll() {
-        for (int i = 0; i <99_999 ; i++){
+        collA = new ArrayList<>();
+        collB = new ArrayList<>();
+        for (int i = 0; i < 99_999; i++) {
             collA.add(new UserSber("username" + Math.random(), "email" + Math.random()));
         }
         collA.add(new UserSber("Wally", "find@wally.com"));
-        for (int i = 0; i <99_999 ; i++){
+        for (int i = 0; i < 99_999; i++) {
             collB.add(new UserSber("username" + Math.random(), "email" + Math.random()));
         }
         collB.add(new UserSber("Wally", "find@wally.com"));
     }
 
     @Test
-    @Timeout(value = 1500, unit = TimeUnit.MILLISECONDS)
+    @Timeout(value = 200, unit = TimeUnit.MILLISECONDS)
     void findDuplicates() {
         long startTimer = System.currentTimeMillis();
         List<UserSber> duplicates = UserSber.findDuplicates(collA, collB);
         long duration = System.currentTimeMillis() - startTimer;
-        System.out.println("Duration : " + duration + " m.s.");
+        System.out.println("Duration with \"retainAll\": " + duration + " m.s.");
         System.out.println("Found duplicates: " + duplicates.size() + ".");
-        for (UserSber d: duplicates) {
+        for (UserSber d : duplicates) {
+            System.out.println(d.getUsername());
+
+        }
+    }
+
+    @Test
+    @Timeout(value = 200, unit = TimeUnit.MILLISECONDS)
+    void findDuplicatesFor() {
+        long startTimer = System.currentTimeMillis();
+        List<UserSber> duplicates = UserSber.findDuplicatesFor(collA, collB);
+        long duration = System.currentTimeMillis() - startTimer;
+        System.out.println("Duration with \"for\" : " + duration + " m.s.");
+        System.out.println("Found duplicates: " + duplicates.size() + ".");
+        for (UserSber d : duplicates) {
+            System.out.println(d.getUsername());
+
+        }
+    }
+
+    @Test
+    @Timeout(value = 200, unit = TimeUnit.MILLISECONDS)
+    void findDuplicatesStream() {
+        long startTimer = System.currentTimeMillis();
+        List<UserSber> duplicates = UserSber.findDuplicatesStream(collA, collB);
+        long duration = System.currentTimeMillis() - startTimer;
+        System.out.println("Duration with \"stream\" : " + duration + " m.s.");
+        System.out.println("Found duplicates: " + duplicates.size() + ".");
+        for (UserSber d : duplicates) {
             System.out.println(d.getUsername());
 
         }
