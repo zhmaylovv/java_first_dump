@@ -2,6 +2,11 @@ package zhmaylo;
 
 import java.util.*;
 import java.util.stream.Collectors;
+/**
+ * @class UserSber Класс пользователя.
+ * @version 1.0
+ * @autor Жмайло Василий
+ */
 
 public class UserSber {
     private String username;
@@ -57,6 +62,11 @@ public class UserSber {
                 Arrays.equals(getPasswordHash(), convertedObj.getPasswordHash());
     }
 
+    /**
+     * Функция поиска дубликатов с использованием HashSet и встроенного метода
+     * .retainAll()
+     * @return возвращает ArrayList преобразуя в него set с пересечениями множеств
+     */
     public static List<UserSber> findDuplicates(Collection<UserSber> collA, Collection<UserSber> collB) {
         HashSet<UserSber> setA = new HashSet<>(collA);
         HashSet<UserSber> setB = new HashSet<>(collB);
@@ -64,6 +74,11 @@ public class UserSber {
         return new ArrayList(setA);
     }
 
+    /**
+     * Функция поиска дубликатов с использованием ArrayList и цикла for
+     * @return возвращает ArrayList.
+     * время работы составляет несколько минут.
+     */
     public static List<UserSber> findDuplicatesFor(Collection<UserSber> collA, Collection<UserSber> collB) {
         List<UserSber> duplicates = new ArrayList<>();
         for (UserSber user : collA) {
@@ -74,6 +89,10 @@ public class UserSber {
         return duplicates;
     }
 
+    /**
+     * Функция поиска дубликатов с использованием HashSet и stream
+     * @return возвращает List.
+     */
     public static List<UserSber> findDuplicatesStream(Collection<UserSber> collA, Collection<UserSber> collB) {
         HashSet<UserSber> setA = new HashSet<>(collA);
         HashSet<UserSber> setB = new HashSet<>(collB);

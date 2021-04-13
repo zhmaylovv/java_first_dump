@@ -30,7 +30,7 @@ class UserSberTest {
 
     @Test
     @Timeout(value = 200, unit = TimeUnit.MILLISECONDS)
-    void findDuplicates() {
+    void findDuplicatesTimeTest() {
         long startTimer = System.currentTimeMillis();
         List<UserSber> duplicates = UserSber.findDuplicates(collA, collB);
         long duration = System.currentTimeMillis() - startTimer;
@@ -44,7 +44,7 @@ class UserSberTest {
 
     @Test
     @Timeout(value = 200, unit = TimeUnit.MILLISECONDS)
-    void findDuplicatesFor() {
+    void findDuplicatesForTimeTest() {
         long startTimer = System.currentTimeMillis();
         List<UserSber> duplicates = UserSber.findDuplicatesFor(collA, collB);
         long duration = System.currentTimeMillis() - startTimer;
@@ -58,7 +58,7 @@ class UserSberTest {
 
     @Test
     @Timeout(value = 200, unit = TimeUnit.MILLISECONDS)
-    void findDuplicatesStream() {
+    void findDuplicatesStreamTimeTest() {
         long startTimer = System.currentTimeMillis();
         List<UserSber> duplicates = UserSber.findDuplicatesStream(collA, collB);
         long duration = System.currentTimeMillis() - startTimer;
